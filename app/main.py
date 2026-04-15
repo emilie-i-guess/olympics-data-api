@@ -1,6 +1,6 @@
 import uuid
-import models
 import schemas
+from . import models
 from utils.utils import format_response
 from fastapi import FastAPI, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
