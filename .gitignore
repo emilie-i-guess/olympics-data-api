@@ -1,0 +1,17 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches
+.mypy_cache/
+.pytest_cache/
+
+# VSCode
+.vscode/
+
+# DB
+olympics.db
+
+# OS files
+.DS_Store
