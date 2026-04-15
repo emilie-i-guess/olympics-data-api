@@ -1,10 +1,10 @@
 import uuid
-from . import schemas
-from . import models
-from utils.utils import format_response
+from app import schemas
+from app import models
+from app.utils.utils import format_response
 from fastapi import FastAPI, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
-from database import SessionLocal, engine
+from app.database import SessionLocal, engine
 from typing import List, Optional
 
 models.Base.metadata.create_all(bind=engine)

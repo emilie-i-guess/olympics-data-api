@@ -1,6 +1,6 @@
 import pandas as pd
-from database import SessionLocal
-import models
+from app.database import SessionLocal
+from app import models
 
 
 def seed_data():
