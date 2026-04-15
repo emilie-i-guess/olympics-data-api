@@ -40,13 +40,15 @@
 3. **Quality and testing:**  
 
     Run pytest to verify logic and token reduction.  
-    
+
     Verified with flake8 and mypy for code standards and type safety.
 
 
 ## Deployment
 
-**Live URL:** 
+**Live URL:** https://olympics-data-api-craj.onrender.com/docs  
+
+**GitHub repo:** https://github.com/emilie-i-guess/olympics-data-api
 
 
 
