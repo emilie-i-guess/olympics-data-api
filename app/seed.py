@@ -1,12 +1,15 @@
 import pandas as pd
-from app.database import SessionLocal
+import os
 from app import models
 
 
-def seed_data():
-    db = SessionLocal()
-
+def seed_data(db):
     print("Reading CSV file... This may take a little while...")
+
+    # Finding correct path to file
+    current_dir = os.path.dirname(__file__)
+    csv_path = os.path.join(current_dir, "..", "athlete_events.csv")
+
     df = pd.read_csv("athlete_events.csv").head(20000)
     df = df.where(pd.notnull(df), None)
 
@@ -38,9 +41,5 @@ def seed_data():
             print(f"Saved {index} rows...")
 
     db.commit()
-    db.close()
     print("Database has been successfully filled with OL data.")
 
-
-if __name__ == "__main__":
-    seed_data()

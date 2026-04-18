@@ -5,9 +5,19 @@ from app.utils.utils import format_response
 from fastapi import FastAPI, Depends, HTTPException, Header
 from sqlalchemy.orm import Session
 from app.database import SessionLocal, engine
+from app.seed import seed_data
 from typing import List, Optional
 
 models.Base.metadata.create_all(bind=engine)
+
+# Checks if DB needs to be filled
+db_check = SessionLocal()
+try:
+    if db_check.query(models.OlympicResult).first() is None:
+        print("No data found. Starting automatic seeding...")
+        seed_data(db_check)
+finally:
+    db_check.close()
 
 app = FastAPI()
 
