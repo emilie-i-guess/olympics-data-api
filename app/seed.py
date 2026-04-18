@@ -8,7 +8,7 @@ def seed_data(db):
 
     # Finding correct path to file
     current_dir = os.path.dirname(__file__)
-    csv_path = os.path.join(current_dir, "..", "athlete_events.csv")
+    csv_path = os.path.join(current_dir, "athlete_events.csv")
 
     df = pd.read_csv("athlete_events.csv").head(20000)
     df = df.where(pd.notnull(df), None)
