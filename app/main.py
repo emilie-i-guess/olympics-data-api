@@ -14,6 +14,10 @@ app = FastAPI()
 
 # Dependency to get database access in endpoint
 def get_db():
+    """
+    Creates a new DB session for each request and 
+    makes sure it will be closed later.
+    """
     db = SessionLocal()
     try:
         yield db
@@ -23,6 +27,10 @@ def get_db():
 
 # Dependency for guarding tokens, or if the user has permission to fetch data
 def verify_token(user_id: str, db: Session = Depends(get_db)):
+    """
+    Verifies that user exists and has enough tokens.
+    Subtracts 1 token for each successful request.
+    """
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
 
     if not user:
@@ -45,6 +53,9 @@ def verify_token(user_id: str, db: Session = Depends(get_db)):
 # POST /v1/user to create user
 @app.post("/v1/user", response_model=schemas.UserResponse)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    """
+    Creates a new user in DB and hands over 100 tokens as a starting bonus.
+    """
     # Check if user already exists
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
@@ -138,6 +149,11 @@ def get_sport_results(
     user: models.User = Depends(verify_token),
     accept: Optional[str] = Header(None),
 ):
+    """
+    Gets historical OL results based on sport.
+    Supports filtering by country (NOC), year and medal type.
+    Delivers XML if 'Accept' header is set to 'application/xml'.
+    """
     query = db.query(models.OlympicResult).filter(
         models.OlympicResult.sport == sport_id
     )

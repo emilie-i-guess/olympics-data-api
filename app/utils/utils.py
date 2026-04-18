@@ -4,7 +4,10 @@ import dicttoxml # type: ignore
 
 # Helper function for format handling
 def format_response(data: dict, accept_header: str):
-    """Converts data to XML if user wants this, else JSON"""
+    """
+    Checks 'Accept' header and converts data to XML by request.
+    Returns JSON as standard.
+    """
     if "application/xml" in accept_header:
         xml_data = dicttoxml.dicttoxml(data, custom_root="response", attr_type=False)
         return Response(content=xml_data, media_type="application/xml")
