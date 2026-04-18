@@ -10,7 +10,7 @@ def seed_data(db):
     current_dir = os.path.dirname(__file__)
     csv_path = os.path.join(current_dir, "athlete_events.csv")
 
-    df = pd.read_csv("athlete_events.csv").head(20000)
+    df = pd.read_csv(csv_path).head(20000)
     df = df.where(pd.notnull(df), None)
 
     print(f"Starting import of {len(df)} rows...")
