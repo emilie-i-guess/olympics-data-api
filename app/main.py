@@ -234,9 +234,12 @@ def get_country_results(
 
     if not results:
         raise HTTPException(status_code=404, detail="Country code not found")
+    
+    region_name = results[0].region or country_id.upper()
 
     return {
-        "country": country_id.upper(),
+        "country_code": country_id.upper(),
+        "country_name": region_name,
         "total_entries": len(results),
         "results": results,
         "remaining_tokens": user.tokens,

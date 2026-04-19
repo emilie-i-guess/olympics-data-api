@@ -16,6 +16,7 @@ class OlympicResult(Base):
     weight = Column(Float, nullable=True)
     team = Column(String)
     noc = Column(String(3), index=True)
+    region = Column(String, nullable=True)
     games = Column(String)
     year = Column(Integer, index=True)
     season = Column(String)
